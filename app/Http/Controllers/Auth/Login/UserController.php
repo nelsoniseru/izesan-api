@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Auth\Login;
 
-use App\Models\Author;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Auth\LoginController;
 
-class AuthorController extends LoginController
+class UserController extends LoginController
 {
     public function login(Request $request)
     {
@@ -19,14 +19,14 @@ class AuthorController extends LoginController
         ]);
 
         // $credentials = request(['email', 'password']);
-        $author = Author::where('email',$request->email)->first();
-        if ($author) {
-            $password = Hash::check($request->password, $author->password);
+        $User = User::where('email',$request->email)->first();
+        if ($User) {
+            $password = Hash::check($request->password, $User->password);
             if ($password) {
-                $tokenResult = $author->createToken('Personal Access Token');
+                $tokenResult = $User->createToken('Personal Access Token');
                 $data = [
-                    'id' => $author->id,
-                    'name' => $author->first_name,
+                    'id' => $User->id,
+                    'name' => $User->first_name,
                     'token' => $tokenResult
                 ];
                 return response()->json([
