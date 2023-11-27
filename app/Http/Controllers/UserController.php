@@ -81,10 +81,9 @@ class UserController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'first_name' => 'nullable','string',
-            'last_name' => 'nullable','string',
-            'country' => 'nullable','string',
-            'description' => 'nullable','string',
+            'name' => 'nullable','string',
+            'email' => 'nullable','string',
+            'password' => 'nullable','string',
         ]);
 
         $user = User::where('id', $id)->first();
