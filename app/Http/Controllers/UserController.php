@@ -63,8 +63,8 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        $user = User::where('id', $id)->first();
-        return new UserResource($user);
+        $users = User::all();
+        return UserResource::collection($users);
     }
 
     /**
